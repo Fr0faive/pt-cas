@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-teal: #236f86;
+    --brand-teal-hover: #1c5b6e;
+    --brand-input-bg: #f0f8fc;
+    --brand-input-border: #85c3db;
+    --brand-bg-dashboard: #c6edf8;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: #1e293b;
+    background-color: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+.font-serif-brand {
+  font-family: "Didot", "Bodoni MT", "Cinzel", "Playfair Display", Georgia, serif;
+}

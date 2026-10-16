@@ -1,0 +1,25 @@
+{
+  "name": "pt-cas-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:api": "turbo dev --filter=@repo/api...",
+    "dev:web": "turbo dev --filter=@repo/web...",
+    "build": "turbo build",
+    "build:shared": "turbo build --filter=@repo/shared",
+    "build:api": "turbo build --filter=@repo/api",
+    "build:web": "turbo build --filter=@repo/web",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "clean": "pnpm -r --parallel exec rm -rf dist .turbo node_modules && rm -rf node_modules pnpm-lock.yaml",
+    "db:generate": "turbo db:generate --filter=@repo/api",
+    "db:push": "turbo db:push --filter=@repo/api",
+    "db:migrate": "turbo db:migrate --filter=@repo/api"
+  },
+  "packageManager": "pnpm@10.28.1",
+  "devDependencies": {
+    "turbo": "^2.11.8"
+  }
+}

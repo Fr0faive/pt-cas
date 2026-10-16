@@ -1,0 +1,363 @@
+{
+  "id": "2b5c44d7-2a71-4573-94cb-ca55f38444cc",
+  "prevId": "00000000-0000-0000-0000-000000000000",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.ms_distributor": {
+      "name": "ms_distributor",
+      "schema": "",
+      "columns": {
+        "kode_distributor": {
+          "name": "kode_distributor",
+          "type": "varchar(50)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_distributor": {
+          "name": "nama_distributor",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ms_outlet": {
+      "name": "ms_outlet",
+      "schema": "",
+      "columns": {
+        "kode_outlet": {
+          "name": "kode_outlet",
+          "type": "varchar(50)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_outlet": {
+          "name": "nama_outlet",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kode_distributor": {
+          "name": "kode_distributor",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "ms_outlet_kode_distributor_ms_distributor_kode_distributor_fk": {
+          "name": "ms_outlet_kode_distributor_ms_distributor_kode_distributor_fk",
+          "tableFrom": "ms_outlet",
+          "tableTo": "ms_distributor",
+          "columnsFrom": [
+            "kode_distributor"
+          ],
+          "columnsTo": [
+            "kode_distributor"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ms_product": {
+      "name": "ms_product",
+      "schema": "",
+      "columns": {
+        "kode_sku": {
+          "name": "kode_sku",
+          "type": "varchar(50)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "nama_sku": {
+          "name": "nama_sku",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "harga_jual": {
+          "name": "harga_jual",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.ms_user": {
+      "name": "ms_user",
+      "schema": "",
+      "columns": {
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(50)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "user_name": {
+          "name": "user_name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "user_password": {
+          "name": "user_password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kode_outlet": {
+          "name": "kode_outlet",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "kode_distributor": {
+          "name": "kode_distributor",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "role": {
+          "name": "role",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'customer'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tr_order_detail": {
+      "name": "tr_order_detail",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order_number": {
+          "name": "order_number",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kode_sku": {
+          "name": "kode_sku",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "qty": {
+          "name": "qty",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "harga_jual": {
+          "name": "harga_jual",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "subtotal": {
+          "name": "subtotal",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tr_order_detail_order_number_tr_order_header_order_number_fk": {
+          "name": "tr_order_detail_order_number_tr_order_header_order_number_fk",
+          "tableFrom": "tr_order_detail",
+          "tableTo": "tr_order_header",
+          "columnsFrom": [
+            "order_number"
+          ],
+          "columnsTo": [
+            "order_number"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tr_order_detail_kode_sku_ms_product_kode_sku_fk": {
+          "name": "tr_order_detail_kode_sku_ms_product_kode_sku_fk",
+          "tableFrom": "tr_order_detail",
+          "tableTo": "ms_product",
+          "columnsFrom": [
+            "kode_sku"
+          ],
+          "columnsTo": [
+            "kode_sku"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.tr_order_header": {
+      "name": "tr_order_header",
+      "schema": "",
+      "columns": {
+        "order_number": {
+          "name": "order_number",
+          "type": "varchar(50)",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "order_date": {
+          "name": "order_date",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone_number": {
+          "name": "phone_number",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kode_outlet": {
+          "name": "kode_outlet",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kode_distributor": {
+          "name": "kode_distributor",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order_status": {
+          "name": "order_status",
+          "type": "varchar(50)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'Menunggu Konfirmasi'"
+        },
+        "total_amount": {
+          "name": "total_amount",
+          "type": "numeric(12, 2)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'0'"
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "tr_order_header_phone_number_ms_user_phone_number_fk": {
+          "name": "tr_order_header_phone_number_ms_user_phone_number_fk",
+          "tableFrom": "tr_order_header",
+          "tableTo": "ms_user",
+          "columnsFrom": [
+            "phone_number"
+          ],
+          "columnsTo": [
+            "phone_number"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tr_order_header_kode_outlet_ms_outlet_kode_outlet_fk": {
+          "name": "tr_order_header_kode_outlet_ms_outlet_kode_outlet_fk",
+          "tableFrom": "tr_order_header",
+          "tableTo": "ms_outlet",
+          "columnsFrom": [
+            "kode_outlet"
+          ],
+          "columnsTo": [
+            "kode_outlet"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "tr_order_header_kode_distributor_ms_distributor_kode_distributor_fk": {
+          "name": "tr_order_header_kode_distributor_ms_distributor_kode_distributor_fk",
+          "tableFrom": "tr_order_header",
+          "tableTo": "ms_distributor",
+          "columnsFrom": [
+            "kode_distributor"
+          ],
+          "columnsTo": [
+            "kode_distributor"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}
